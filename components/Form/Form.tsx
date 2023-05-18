@@ -2,8 +2,10 @@
 import React from "react";
 import Input from "./Input";
 import { useState } from "react";
-
+import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
+import { create } from "@/redux/features/create/createSlice";
 const Form = () => {
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,6 +16,7 @@ const Form = () => {
   const submitHandler = (e: any) => {
     e.preventDefault();
     console.log(formData);
+    // dispatch(create(formData));
   };
   return (
     <form
