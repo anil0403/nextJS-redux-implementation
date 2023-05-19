@@ -51,9 +51,15 @@ export const formSlice = createSlice({
       updatedData.push(newData);
       state.data = updatedData;
     },
-    changeColor: (state, action: PayloadAction<Object>) => {
-      // change color
+    changeColor: (state, action: PayloadAction<string>) => {
+      state.backgroundColor = action.payload;
+   
     },
+    changeTextColor:(state , action :PayloadAction<string>) =>{
+      state.textColor = action.payload;
+     
+    },
+
     inputColor: (state, action: PayloadAction<Object>) => {
       // change color
     },
@@ -68,7 +74,10 @@ export const {
   deleteData,
   update,
   deleteCurrentData,
+  changeColor,
+  changeTextColor,
 } = formSlice.actions;
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.formdata.data;
+
 export default formSlice.reducer;
