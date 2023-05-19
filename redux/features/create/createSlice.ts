@@ -26,6 +26,13 @@ export const formSlice = createSlice({
     deleteCurrentData: (state) => {
       state.currentData = {};
     },
+    deleteData: (state, action: PayloadAction<Object>) => {
+      const elementToRemove = action.payload;
+      const newArray = state.data.filter((element) => {
+        return element.email !== (elementToRemove as any).email;
+      });
+      state.data = newArray;
+    },
     update: (state, action: PayloadAction<Object>) => {
       const newData = action.payload;
       const updatedData = state.data.filter((item) => {
@@ -39,7 +46,13 @@ export const formSlice = createSlice({
     },
   },
 });
-export const { create, createCurrentData, update,deleteCurrentData } = formSlice.actions;
+export const {
+  create,
+  createCurrentData,
+  deleteData,
+  update,
+  deleteCurrentData,
+} = formSlice.actions;
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.formdata.data;
 export default formSlice.reducer;

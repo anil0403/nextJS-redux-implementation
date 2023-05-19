@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
+import { useAppDispatch } from "@/redux/hooks/hooks";
 import { useRouter } from "next/navigation";
-import { createCurrentData } from "@/redux/features/create/createSlice";
-// import { createCurrent } from "@/redux/features/current/currentSlice";
+import {
+  createCurrentData,
+  deleteData,
+} from "@/redux/features/create/createSlice";
 
 interface CardProps {
   name?: string;
@@ -14,20 +16,22 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ name, email, phone, address, dob }) => {
-
-
+  const currentData = {
+    name: name,
+    email: email,
+    address: address,
+    phone: phone,
+    dob: dob,
+  };
   const router = useRouter();
   const dispatch = useAppDispatch();
   const editHandler = () => {
-    const currentData = {
-      name: name,
-      email: email,
-      address: address,
-      phone: phone,
-      dob: dob,
-    };
     dispatch(createCurrentData(currentData));
     router.push("/");
+  };
+
+  const deleteHandler = () => {
+    dispatch(deleteData(currentData));
   };
   return (
     <div className="group p-5 bg-white rounded-md shadow-md shadow-sky-500  text-sm font-semibold ">
@@ -55,7 +59,7 @@ const Card: React.FC<CardProps> = ({ name, email, phone, address, dob }) => {
           Edit
         </button>
         <button
-          onClick={() => {}}
+          onClick={deleteHandler}
           className="bg-red-600 p-2 rounded-md text-white hover:bg-red-700"
         >
           Delete
