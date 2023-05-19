@@ -6,12 +6,20 @@ interface InputProps {
   type: string;
   id: string;
   onChange: any;
+  disabled?: boolean;
 }
 <input type="text" />;
-const Input: React.FC<InputProps> = ({ label, value, type, id, onChange }) => {
+const Input: React.FC<InputProps> = ({
+  label,
+  value,
+  type,
+  id,
+  onChange,
+  disabled,
+}) => {
   return (
     <div className="w-full py-2 flex flex-col gap-1 items-start">
-      <label className="text-md font-semibold" htmlFor= {`${id}`}>
+      <label className="text-md font-semibold" htmlFor={`${id}`}>
         {label}:
       </label>
       <input
@@ -19,6 +27,7 @@ const Input: React.FC<InputProps> = ({ label, value, type, id, onChange }) => {
         id={`${id}`}
         type={`${type}`}
         value={`${value}`}
+        disabled={disabled}
         onChange={onChange}
       />
     </div>

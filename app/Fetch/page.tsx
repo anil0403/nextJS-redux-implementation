@@ -4,7 +4,7 @@ import { useAppSelector } from "@/redux/hooks/hooks";
 import Card from "@/components/Card/Card";
 const Fetch = () => {
   const data = useAppSelector((state) => state.formdata.data);
-  console.log(data);
+  // console.log(data);
   return (
     <div className="bbg-sky-500">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">

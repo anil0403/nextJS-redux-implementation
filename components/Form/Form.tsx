@@ -1,27 +1,50 @@
-"use client";
 import React from "react";
 import Input from "./Input";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { create } from "@/redux/features/create/createSlice";
-interface FormProps {
-  email?: string;
-  data?: object;
-}
 
-const Form: React.FC<FormProps> = ({ email, data }) => {
+import { useRouter } from "next/navigation";
+import {
+  create,
+  update,
+  deleteCurrentData,
+} from "@/redux/features/create/createSlice";
+
+const Form = () => {
+  const router = useRouter();
+  const newCurrentData = useAppSelector(
+    (state) => state.formdata.currentData || {}
+  );
+  console.log(newCurrentData);
+  const isDataEmpty = Object.keys(newCurrentData).length === 0;
+
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    address: "",
-    phone: "",
-    dob: "",
+    name: (newCurrentData as any).name || "",
+    email: (newCurrentData as any).email || "",
+    address: (newCurrentData as any).address || "",
+    phone: (newCurrentData as any).phone || "",
+    dob: (newCurrentData as any).dob || "",
   });
   const submitHandler = (e: any) => {
     e.preventDefault();
     // console.log(formData);
-    dispatch(create(formData));
+
+    if (!isDataEmpty) {
+      console.log("updating ...");
+      dispatch(update(formData));
+      dispatch(deleteCurrentData());
+      router.push("/Fetch");
+    } else {
+      dispatch(create(formData));
+    }
+    setFormData({
+      name: "",
+      email: "",
+      address: "",
+      phone: "",
+      dob: "",
+    });
   };
   return (
     <form
@@ -37,6 +60,7 @@ const Form: React.FC<FormProps> = ({ email, data }) => {
           setFormData({ ...formData, name: e.target.value });
         }}
       />
+
       <Input
         label="Email"
         type="email"
@@ -45,7 +69,9 @@ const Form: React.FC<FormProps> = ({ email, data }) => {
         onChange={(e: any) => {
           setFormData({ ...formData, email: e.target.value });
         }}
+        disabled={!isDataEmpty}
       />
+
       <Input
         label="Address"
         type="text"
@@ -74,7 +100,7 @@ const Form: React.FC<FormProps> = ({ email, data }) => {
         }}
       />
       <button className="text-md text-white font-semibold  bg-sky-500 hover:bg-sky-600 w-full py-2 mt-3 rounded-md">
-        Submit
+        {isDataEmpty ? "Submit" : "Update"}
       </button>
     </form>
   );
