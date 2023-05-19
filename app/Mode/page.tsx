@@ -3,12 +3,10 @@ import "../globals.css"
 import React, { useState  } from "react";
 
 import { useAppDispatch } from "@/redux/hooks/hooks";
-import { RootState } from "../../redux/store/store";
 import { changeColor,changeTextColor } from "@/redux/features/create/createSlice";
 import { HiLightBulb, HiOutlineLightBulb } from "react-icons/hi";
-
 import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md";
-import { useSelector } from "react-redux";
+
 const Mode = () => {
   
   const changeToWhite=()=>{
@@ -53,7 +51,7 @@ const Mode = () => {
 "
           onClick={changeToBlack}
         >
-          <p>hii</p>
+          
           <button className="p-3 text-md font-semibold text-whiterounded-md text-white">
             Dark
           </button>
