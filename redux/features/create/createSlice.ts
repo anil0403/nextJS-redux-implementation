@@ -6,11 +6,19 @@ import type { RootState } from "../../store/store";
 interface createData {
   data: Array<any>;
   currentData: Object;
+  textColor: string;
+  backgroundColor: string;
+  border: string;
+  color: string;
 }
 // Define the initial state using that type
 const initialState: createData = {
   data: [],
   currentData: {},
+  textColor: "black",
+  backgroundColor: "white",
+  border: "black",
+  color: "black",
 };
 export const formSlice = createSlice({
   name: "createFormData",
@@ -42,7 +50,15 @@ export const formSlice = createSlice({
       });
       updatedData.push(newData);
       state.data = updatedData;
-      // state.currentData = action.payload;
+    },
+    changeColor: (state, action: PayloadAction<Object>) => {
+      // change color
+    },
+    inputColor: (state, action: PayloadAction<Object>) => {
+      // change color
+    },
+    changeMode: (state, action: PayloadAction<Object>) => {
+      // change color
     },
   },
 });
