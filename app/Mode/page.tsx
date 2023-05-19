@@ -8,8 +8,11 @@ import { HiLightBulb, HiOutlineLightBulb } from "react-icons/hi";
 import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md";
 
 const Mode = () => {
-  
+  const [mode, setMode] = useState("white");
+
   const changeToWhite=()=>{
+
+    setMode("white")
     dispatch(changeColor("white"));
     dispatch(changeTextColor("black"));
     const body = document.querySelector("body");
@@ -17,6 +20,7 @@ const Mode = () => {
     (body as any).style.color = "black"
   }
   const changeToBlack=()=>{
+    setMode("black")
     dispatch(changeColor("black"));
     dispatch(changeTextColor("white"));
     const body = document.querySelector("body");
@@ -33,37 +37,28 @@ const Mode = () => {
   
   
   return (
-    <div className={`mx-auto w-[80%] md:w-[50] lg:w-[40] relative `}>
-
-      <div className="  flex flex-row gap-4 absolute right-5">
+    <div className="mx-auto w-[80%] md:w-[50] lg:w-[40] relative">
+      <div className="flex flex-row gap-4 absolute right-5">
         <div
-          className="flex flex-row gap-2 items-center border-2 border-black rounded-md px-2 cursor-pointer
-"
+          className={`flex flex-row gap-2 items-center border-2 border-black rounded-md px-2 cursor-pointer ${
+            mode === 'light' ? 'bg-white' : ''
+          }`}
           onClick={changeToWhite}
         >
-          <button className="p-3 text-md font-semibold text-whiterounded-md ">
-            Light
-          </button>
-          <HiOutlineLightBulb color="black" size={30} />
+          <button className="p-3 text-md font-semibold rounded-md">Light</button>
+          <HiOutlineLightBulb color={mode === 'white' ? 'black' : 'white'} size={30} />
         </div>
         <div
-          className="flex flex-row gap-2 items-center border-2 border-black bg-black rounded-md px-2 cursor-pointer
-"
+          className={`flex flex-row gap-2 items-center border-2 border-black rounded-md px-2 cursor-pointer ${
+            mode === 'dark' ? 'bg-black' : ''
+          }`}
           onClick={changeToBlack}
         >
-          
-          <button className="p-3 text-md font-semibold text-whiterounded-md text-white">
-            Dark
-          </button>
-          <MdOutlineDarkMode
-            className="bg-black rounded-md "
-            color="white"
-            size={30}
-          />
+          <button className="p-3 text-md font-semibold rounded-md ">Dark</button>
+          <MdOutlineDarkMode className="rounded-md" color={mode === 'white' ? 'black' : 'white'} size={30} />
         </div>
       </div>
     </div>
   );
 };
-
 export default Mode;
