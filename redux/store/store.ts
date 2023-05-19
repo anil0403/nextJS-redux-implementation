@@ -1,10 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSlice from "../features/create/createSlice";
+import currentSlice from "../features/current/currentSlice";
+
 // ...
 
 export const store = configureStore({
   reducer: {
     formdata: createSlice,
+    currentData: currentSlice,
   },
 });
 
