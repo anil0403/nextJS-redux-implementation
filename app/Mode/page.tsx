@@ -20,7 +20,7 @@ const Mode = () => {
     (body as any).style.color = "black"
   }
   const changeToBlack=()=>{
-    setMode("black")
+    setMode("dark")
     dispatch(changeColor("black"));
     dispatch(changeTextColor("white"));
     const body = document.querySelector("body");
@@ -41,7 +41,7 @@ const Mode = () => {
       <div className="flex flex-row gap-4 absolute right-5">
         <div
           className={`flex flex-row gap-2 items-center border-2 border-black rounded-md px-2 cursor-pointer ${
-            mode === 'light' ? 'bg-white' : ''
+            mode === 'dark' ? 'border-white' : 'border-black'
           }`}
           onClick={changeToWhite}
         >
@@ -50,7 +50,7 @@ const Mode = () => {
         </div>
         <div
           className={`flex flex-row gap-2 items-center border-2 border-black rounded-md px-2 cursor-pointer ${
-            mode === 'dark' ? 'bg-black' : ''
+            mode === 'dark' ? 'border-white' : 'border-black'
           }`}
           onClick={changeToBlack}
         >
