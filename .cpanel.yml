@@ -8,3 +8,4 @@ deployment:
     - /bin/cp package.json $DEPLOYPATH
     - cd $DEPLOYPATH
     - npm install --production
+    - npm run build
